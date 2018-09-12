@@ -14,7 +14,7 @@ defmodule AccountProcessors.CapitalOne do
 
 
       case set_amount(txn, debit, credit) do
-        {:error, message} -> {:error, message <> ": " <> inspect(record)}
+        {:error, message} -> {:error, "#{message}: #{inspect(record)}"}
         ok -> ok
       end
     end

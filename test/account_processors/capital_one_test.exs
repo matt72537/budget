@@ -16,6 +16,7 @@ defmodule AccountProcessors.CapitalOneTest do
         description: description,
         date: txn_date,
         owner: owner_name,
+        category: :Bills,
         debit: 0,
         credit: 0
       }
@@ -28,7 +29,7 @@ defmodule AccountProcessors.CapitalOneTest do
     test "will set proper values for a debit", context do
       map_transaction = CapitalOne.map_transaction_for(context.name)
       record = [:ignore, context.txn_date, :ignore, :ignore, context.description, :a_category, "123.45", ""]
-      mapped_txn = %{ context.expected_txn | category: :Bills, debit: 123.45 }
+      mapped_txn = %{ context.expected_txn | debit: 123.45 }
 
       assert map_transaction.(record) == {:ok, mapped_txn}
     end
@@ -36,7 +37,7 @@ defmodule AccountProcessors.CapitalOneTest do
     test "will set proper values for a credit", context do
       map_transaction = CapitalOne.map_transaction_for(context.name)
       record = [:ignore, context.txn_date, :ignore, :ignore, context.description, :a_category, "", "67.89"]
-      mapped_txn = %{ context.expected_txn | category: :Bills, credit: 67.89 }
+      mapped_txn = %{ context.expected_txn | credit: 67.89 }
 
       assert map_transaction.(record) == {:ok, mapped_txn}
     end
