@@ -10,11 +10,11 @@ use Mix.Config
 
 # You can configure your application as:
 #
-#     config :budget, key: :value
+#     config :kv, key: :value
 #
 # and access this configuration in your application as:
 #
-#     Application.get_env(:budget, :key)
+#     Application.get_env(:kv, :key)
 #
 # You can also configure a 3rd-party app:
 #
@@ -28,3 +28,23 @@ use Mix.Config
 # here (which is why it is important to import them last).
 #
 #     import_config "#{Mix.env}.exs"
+config :goth,
+       json: "./config/service_account.json" |> File.read!
+
+config :elixir_google_spreadsheets,
+       max_rows_per_request: 301,
+       default_column_from: 1,
+       default_column_to: 26
+
+config :elixir_google_spreadsheets, :client,
+       request_workers: 50,
+       max_demand: 100,
+       max_interval: :timer.minutes(1),
+       interval: 100,
+       result_timeout: :timer.minutes(10),
+       request_opts: [
+         timeout: :timer.seconds(8),
+         recv_timeout: :timer.seconds(5)
+       ]
+
+#import_config "#{Mix.env}.exs"
