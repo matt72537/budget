@@ -22,7 +22,8 @@ defmodule Budget.MixProject do
   defp deps do
     [
       {:nimble_csv, "~> 0.3"},
-      {:elixir_google_spreadsheets, "~> 0.1.9"}
+      {:elixir_google_spreadsheets, "~> 0.1.9"},
+      {:moneyex, "~> 0.1.0"}
     ]
   end
 end

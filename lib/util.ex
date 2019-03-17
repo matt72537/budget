@@ -31,4 +31,23 @@ defmodule Util do
     end
   end
 
+  def to_amount(value) do
+    Money.convert_to_integer(value)
+  end 
+  
+  def format_amount(value) do
+    digits = Integer.digits(value)
+
+    case Enum.count(digits) do
+      1 -> "0.0" <> Integer.to_string(value)
+      _ -> format_digits(digits)
+    end
+  end
+
+  defp format_digits(digits) do
+    characteristic = Integer.to_string(Integer.undigits(Enum.drop(digits, -2)))
+    mantissa = Enum.map_join(Enum.take(digits, -2), &Integer.to_string/1)
+
+    characteristic <> "." <> mantissa
+  end
 end
