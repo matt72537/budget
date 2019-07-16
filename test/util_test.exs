@@ -47,6 +47,7 @@ defmodule UtilTest do
       assert 9900 == to_amount("99")
       assert 15 == to_amount("0.15")
       assert 2 == to_amount("0.02")
+      assert 0 == to_amount("0.00")
     end
   end
 
